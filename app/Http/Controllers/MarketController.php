@@ -14,6 +14,7 @@ class MarketController extends Controller
     public function index()
     {
         $data = ["aa"=>"helloWorld"];
+        echo "1테스트스";
         return response()->json($data);
     }
 
