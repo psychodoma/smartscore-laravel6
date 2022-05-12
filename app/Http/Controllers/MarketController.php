@@ -16,6 +16,7 @@ class MarketController extends Controller
         $data = ["aa"=>"helloWorld"];
         echo "1테스트";
         echo "2테스트";
+        echo "3테스트";
         return response()->json($data);
     }
 
