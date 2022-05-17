@@ -15,36 +15,33 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+
 $local = ['localhost', '127.0.0.1'];
 
-$host = $_SERVER['REMOTE_ADDR'];
+$host = $_SERVER["REMOTE_ADDR"] ?? '127.0.0.1';
 if (!in_array($host, $local)) {
     $host = explode('.', $_SERVER['HTTP_HOST'])[0];
     if (substr($host, 0, 2) === 'rd') $host = 'rd';
 }
 
-$app->loadEnvironmentFrom('.env.local');
-dd(env('APP_NAME'));
-//switch($host) {
-//    case 'localhost':
-//    case '127.0.0.1':
-//        $app->loadEnvironmentFrom('.env.local'); // 개인 로컬
-//         dd(env('APP_NAME'));
-//        break;
-//    case 'www':
-//    case 'cc':
-//    case 'psn':
-//    case 'smartscore':
-//        $app->loadEnvironmentFrom('.env'); // 상용
-//        break;
-//    case 'rd':
-//        $app->loadEnvironmentFrom('.env.release'); // rd 서버
-//        break;
-//    default:
-//        $app->loadEnvironmentFrom('.env.development'); // td
-//         dd(env('APP_NAME'));
-//        break;
-//};
+switch($host) {
+    case 'localhost':
+    case '127.0.0.1':
+        $app->loadEnvironmentFrom('.env.local'); // 개인 로컬
+        break;
+    case 'www':
+    case 'cc':
+    case 'psn':
+    case 'api':
+        $app->loadEnvironmentFrom('.env'); // 상용
+        break;
+    case 'rd':
+        $app->loadEnvironmentFrom('.env.release'); // rd 서버
+        break;
+    default:
+        $app->loadEnvironmentFrom('.env.development'); // td
+        break;
+};
 
 /*
 |--------------------------------------------------------------------------
