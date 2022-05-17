@@ -15,10 +15,9 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
-
 $local = ['localhost', '127.0.0.1'];
 
-$host = $_SERVER["REMOTE_ADDR"] ?? '127.0.0.1';
+$host = $_SERVER['REMOTE_ADDR'];
 if (!in_array($host, $local)) {
     $host = explode('.', $_SERVER['HTTP_HOST'])[0];
     if (substr($host, 0, 2) === 'rd') $host = 'rd';
